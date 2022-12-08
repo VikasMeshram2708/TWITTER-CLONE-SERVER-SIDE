@@ -11,7 +11,7 @@ const Tweet = db.get("tweets");
 const fetchuser = require("../Middlewares/fetchuser");
 
 // ROUTE 1 : MAKE a Tweet using POST : "/api/v1/tweets/makeTweet"
-router.post("/makeTweet", async (req, res) => {
+router.post("/makeTweet", fetchuser, async (req, res) => {
   try {
     // validate the body
     const tweet = await TweetSchema.validateAsync(req.body);
@@ -35,7 +35,7 @@ router.post("/makeTweet", async (req, res) => {
 });
 
 // ROUTE 2 : Read One using POST  : "/api/v1/tweets/makeTweet/:id"
-router.get("/readMyTweet/:id", async (req, res) => {
+router.get("/readMyTweet/:id", fetchuser, async (req, res) => {
   try {
     // find user using id
     const { id } = req.params;
@@ -59,7 +59,7 @@ router.get("/readMyTweet/:id", async (req, res) => {
 });
 
 // ROUTE 3 : UPDATE a Tweet using POST : "/api/v1/tweets/updateMyTweet/:id"
-router.put("/updateMyTweet/:id", async (req, res) => {
+router.put("/updateMyTweet/:id", fetchuser, async (req, res) => {
   try {
     // validete the body
     const value = await TweetSchema.validateAsync(req.body);
@@ -96,7 +96,7 @@ router.put("/updateMyTweet/:id", async (req, res) => {
 });
 
 // ROUTE 4: DELETE a TWEET using POST : "/api/v1/tweets/deleteMyTweet/:id"
-router.delete("/deleteMyTweet/:id", async (req, res) => {
+router.delete("/deleteMyTweet/:id", fetchuser, async (req, res) => {
   try {
     // find the user id
     const { id } = req.params;
